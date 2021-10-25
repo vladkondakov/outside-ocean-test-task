@@ -1,0 +1,11 @@
+server:
+  port: 3000
+
+db:
+  host: ""
+  username: ""
+  password: ""
+  synchronize: true
+
+jwt:
+  secret: "Some_secret_string21"

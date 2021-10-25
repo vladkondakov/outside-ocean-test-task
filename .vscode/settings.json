@@ -1,0 +1,9 @@
+{
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+  "eslint.alwaysShowStatus": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "typescript.tsdk": "node_modules\\typescript\\lib",
+}
