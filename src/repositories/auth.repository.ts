@@ -17,6 +17,15 @@ export class AuthRepository {
     return refreshToken
   }
 
+  async getRefreshTokenByHash(hash: string): Promise<RefreshTokenDto> {
+    const queryText = `SELECT * FROM public.refresh_token as rt
+      WHERE rt.hash = '${hash}'
+      LIMIT 1`
+
+    const { row: refreshToken } = await this._databaseService.getQueryResult<RefreshTokenDto>(queryText)
+    return refreshToken
+  }
+
   async saveRefreshToken(refreshToken: string, userUid: string): Promise<void> {
     const queryText = `INSERT INTO public.refresh_token(hash, user_uid) VALUES('${refreshToken}', '${userUid}')`
     await this._databaseService.getQueryResult<RefreshTokenDto>(queryText)

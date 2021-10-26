@@ -22,7 +22,7 @@ export class AuthService {
 
   constructor(private readonly _userRepository: UserRepository, private readonly _jwtService: JwtService, private readonly _authRepository: AuthRepository) {}
 
-  async signIn(signInCredentials: SignInCredentialsDto): Promise<any> {
+  async signIn(signInCredentials: SignInCredentialsDto): Promise<JwtTokensDto> {
     const { email, password, nickname } = signInCredentials
     const uid = uuidv4()
 
@@ -61,10 +61,7 @@ export class AuthService {
   }
 
   private async generateJwtTokens(payload: JwtPayload): Promise<JwtTokensDto> {
-    const existingRefreshToken = await this._authRepository.getRefreshTokenByUserUid(payload.uid)
-    if (existingRefreshToken) {
-      await this._authRepository.deleteRefreshToken(payload.uid)
-    }
+    await this._authRepository.deleteRefreshToken(payload.uid)
 
     const accessToken = await this._jwtService.signAsync(payload, { secret: this.secretKey, expiresIn: this.accessExpires, algorithm: "HS512" })
     const refreshToken = await this._jwtService.signAsync(payload, { secret: this.secretKey, expiresIn: this.refreshExpires, algorithm: "HS512" })
@@ -77,6 +74,24 @@ export class AuthService {
     }
 
     return jwtTokens
+  }
+
+  async refreshTokens(jwtTokens: JwtTokensDto): Promise<JwtTokensDto> {
+    const { accessToken, refreshToken } = jwtTokens
+    const existingRefreshToken = await this._authRepository.getRefreshTokenByHash(refreshToken)
+
+    if (existingRefreshToken == null) {
+      throw new UnauthorizedException("Invalid token")
+    }
+
+    try {
+      const { iat, exp, ...restProps } = await this._jwtService.verifyAsync<JwtPayload>(refreshToken, { secret: this.secretKey, algorithms: ["HS512"] })
+      const refreshedJwtTokens = await this.generateJwtTokens(restProps)
+
+      return refreshedJwtTokens
+    } catch (e) {
+      throw new UnauthorizedException("Invalid token")
+    }
   }
 
   private async comparePasswords(password: any, hashedPassword: any) {
