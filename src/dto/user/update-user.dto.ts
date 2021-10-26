@@ -8,15 +8,15 @@ export class UpdateUserDto {
   @MaxLength(100)
   @IsEmail()
   @IsNotEmpty()
-  email: string
+  email?: string
 
   @IsOptional()
   @Matches(passwordRegex, { message: "Password must include at least one upper case, one lower case and one number" })
-  password: string
+  password?: string
 
   @IsOptional()
   @IsString()
   @MaxLength(30)
   @IsNotEmpty()
-  nickname: string
+  nickname?: string
 }

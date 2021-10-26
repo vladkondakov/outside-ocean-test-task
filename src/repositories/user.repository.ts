@@ -40,6 +40,15 @@ export class UserRepository {
     return user
   }
 
+  async getUserByUidWithPassword(uid: string): Promise<UserDto> {
+    const queryText = `SELECT email, nickname, password
+      FROM public.users AS users
+      WHERE users.uid = '${uid}'`
+
+    const { row: user } = await this._databaseService.getQueryResult<UserDto>(queryText)
+    return user
+  }
+
   async getUserByUid(uid: string): Promise<UserDto> {
     const queryText = `SELECT email, nickname
       FROM public.users AS users
@@ -49,13 +58,20 @@ export class UserRepository {
     return user
   }
 
-  async updateCurrentUser(uid: string, userToUpdate: UpdateUserDto): Promise<void> {
+  async updateUser(uid: string, userToUpdate: UpdateUserDto): Promise<void> {
     const { email, password, nickname } = userToUpdate
 
-    const queryText = `UPDATE public.users AS users SET
-        users.email = COALESCE(NULLIF('${email}', 'undefined'), users.email),
-        users.password = COALESCE(NULLIF('${password}', 'undefined'), users.password),
-        users.email = COALESCE(NULLIF('${nickname}', 'undefined'), users.nickname)
+    const queryText = `UPDATE users SET
+        email = '${email}',
+        password = '${password}',
+        nickname = '${nickname}'
+      WHERE uid = '${uid}'`
+
+    await this._databaseService.getQueryResult<any>(queryText)
+  }
+
+  async deleteUser(uid: string): Promise<void> {
+    const queryText = `DELETE FROM public.users AS users
       WHERE users.uid = '${uid}'`
 
     await this._databaseService.getQueryResult<any>(queryText)

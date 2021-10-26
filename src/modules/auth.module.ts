@@ -20,7 +20,7 @@ const jwtConfig: any = Config.get("jwt")
     JwtModule.register({
       secret: process.env.JWT_SECRET || jwtConfig.secret,
       signOptions: {
-        expiresIn: process.env.JWT_EXPIRES || jwtConfig.expiresIn,
+        expiresIn: process.env.JWT_EXPIRES_IN || jwtConfig.expiresIn,
         algorithm: "HS512",
       },
     }),
@@ -28,6 +28,6 @@ const jwtConfig: any = Config.get("jwt")
   ],
   controllers: [AuthController],
   providers: [JwtStrategy, AuthService, UserRepository, AuthRepository],
-  exports: [JwtStrategy, PassportModule],
+  exports: [JwtStrategy, PassportModule, JwtModule, AuthService, AuthRepository],
 })
 export class AuthModule {}
