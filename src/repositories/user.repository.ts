@@ -50,7 +50,7 @@ export class UserRepository {
   }
 
   async getUserByUid(uid: string): Promise<UserDto> {
-    const queryText = `SELECT email, nickname
+    const queryText = `SELECT uid, email, nickname
       FROM public.users AS users
       WHERE users.uid = '${uid}'`
 

@@ -30,6 +30,7 @@ export class UserService {
     return userFull
   }
 
+  // refactor: remove checkIfUserExists method
   async updateCurrentUser(uid: string, userToUpdate: UpdateUserDto) {
     await this._userRepository.checkIfUserExists(userToUpdate.email, userToUpdate.nickname)
 
