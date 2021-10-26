@@ -1,10 +1,12 @@
-import { Body, Controller, Get, Put, UseGuards } from "@nestjs/common"
+import { Body, Controller, Get, Put, UseGuards, UseInterceptors } from "@nestjs/common"
 import { AuthGuard } from "@nestjs/passport"
 import { getUser } from "src/decorators/get-user.decorator"
 import { JwtPayload } from "src/dto/auth/jwt-payload.dto"
 import { UpdateUserDto } from "src/dto/user/update-user.dto"
+import { ResponseInterceptor } from "src/interceptors/api-response.interceptor"
 import { UserService } from "src/services/user.service"
 
+@UseInterceptors(new ResponseInterceptor<any>())
 @UseGuards(AuthGuard())
 @Controller("user")
 export class UserController {

@@ -1,4 +1,4 @@
-import { Body, Controller, Post, UseGuards } from "@nestjs/common"
+import { Body, Controller, Post, UseGuards, UseInterceptors } from "@nestjs/common"
 
 import { JwtPayload } from "../dto/auth/jwt-payload.dto"
 import { AuthService } from "../services/auth.service"
@@ -7,7 +7,9 @@ import { LoginCredentialsDto } from "src/dto/auth/login-credentials.dto"
 import { JwtTokensDto } from "src/dto/auth/jwt-tokens.dto"
 import { AuthGuard } from "@nestjs/passport"
 import { getUser } from "src/decorators/get-user.decorator"
+import { ResponseInterceptor } from "src/interceptors/api-response.interceptor"
 
+@UseInterceptors(new ResponseInterceptor<any>())
 @Controller("auth")
 export class AuthController {
   constructor(private readonly _authService: AuthService) {}
