@@ -94,6 +94,14 @@ export class AuthService {
     }
   }
 
+  /*
+    Also we can create tokens block-list to check the access token. So we ask to pass access and refresh tokens in req body.
+    Then verify them, after delete refresh token and add access token to the block-list
+  */
+  async logout(payload: JwtPayload): Promise<void> {
+    await this._authRepository.deleteRefreshToken(payload.uid)
+  }
+
   private async comparePasswords(password: any, hashedPassword: any) {
     return await bcrypt.compare(password, hashedPassword)
   }

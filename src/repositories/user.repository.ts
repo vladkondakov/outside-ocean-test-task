@@ -1,4 +1,5 @@
 import { BadRequestException, Injectable } from "@nestjs/common"
+import { UpdateUserDto } from "src/dto/user/update-user.dto"
 import { UserToInsert } from "src/dto/user/user-to-insert.dto"
 import { UserDto } from "src/dto/user/user.dto"
 import { DatabaseService } from "src/services/database.service"
@@ -31,10 +32,32 @@ export class UserRepository {
   }
 
   async getUserByEmail(email: string): Promise<UserDto> {
-    const queryText = `SELECT uid, email, password, nickname FROM public.users AS users
+    const queryText = `SELECT uid, email, password, nickname
+      FROM public.users AS users
       WHERE users.email = '${email}'`
 
     const { row: user } = await this._databaseService.getQueryResult<UserDto>(queryText)
     return user
+  }
+
+  async getUserByUid(uid: string): Promise<UserDto> {
+    const queryText = `SELECT email, nickname
+      FROM public.users AS users
+      WHERE users.uid = '${uid}'`
+
+    const { row: user } = await this._databaseService.getQueryResult<UserDto>(queryText)
+    return user
+  }
+
+  async updateCurrentUser(uid: string, userToUpdate: UpdateUserDto): Promise<void> {
+    const { email, password, nickname } = userToUpdate
+
+    const queryText = `UPDATE public.users AS users SET
+        users.email = COALESCE(NULLIF('${email}', 'undefined'), users.email),
+        users.password = COALESCE(NULLIF('${password}', 'undefined'), users.password),
+        users.email = COALESCE(NULLIF('${nickname}', 'undefined'), users.nickname)
+      WHERE users.uid = '${uid}'`
+
+    await this._databaseService.getQueryResult<any>(queryText)
   }
 }
