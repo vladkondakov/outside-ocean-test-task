@@ -1,4 +1,4 @@
 export class DbQResultDto<T> {
-  rows: T[]
+  row: T
   rowsCount: number
 }

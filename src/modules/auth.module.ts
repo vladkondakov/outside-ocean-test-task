@@ -1,5 +1,5 @@
 import { Module } from "@nestjs/common"
-import { JwtModule } from "@nestjs/jwt"
+import { JwtModule, JwtService } from "@nestjs/jwt"
 import { PassportModule } from "@nestjs/passport"
 import Config from "config"
 
@@ -8,6 +8,7 @@ import { AuthController } from "../controllers/auth.controller"
 import { AuthService } from "../services/auth.service"
 import { DatabaseModule } from "./database.module"
 import { UserRepository } from "src/repositories/user.repository"
+import { AuthRepository } from "src/repositories/auth.repository"
 
 const jwtConfig: any = Config.get("jwt")
 
@@ -19,14 +20,14 @@ const jwtConfig: any = Config.get("jwt")
     JwtModule.register({
       secret: process.env.JWT_SECRET || jwtConfig.secret,
       signOptions: {
-        expiresIn: process.env.JWT_SECRET || jwtConfig.expiresIn,
+        expiresIn: process.env.JWT_EXPIRES || jwtConfig.expiresIn,
         algorithm: "HS512",
       },
     }),
     DatabaseModule,
   ],
   controllers: [AuthController],
-  providers: [JwtStrategy, AuthService, UserRepository],
+  providers: [JwtStrategy, AuthService, UserRepository, AuthRepository],
   exports: [JwtStrategy, PassportModule],
 })
 export class AuthModule {}

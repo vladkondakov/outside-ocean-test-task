@@ -9,15 +9,16 @@ export class UserRepository {
 
   async checkIfUserExists(email: string, nickname: string): Promise<void> {
     const queryText = `SELECT * FROM public.users AS users
-    WHERE users.email = '${email}' OR users.nickname = '${nickname}'
-    LIMIT 1`
+      WHERE users.email = '${email}' OR users.nickname = '${nickname}'
+      LIMIT 1`
 
-    const { rows: users } = await this._databaseService.getQueryResult<UserDto>(queryText)
+    const { row: user } = await this._databaseService.getQueryResult<UserDto>(queryText)
 
-    if (users.length > 0) {
-      if (users[0].email === email) {
+    if (user) {
+      if (user.email === email) {
         throw new BadRequestException("User with provided email was found")
       }
+
       throw new BadRequestException("User with provided nickname was found")
     }
   }
@@ -27,5 +28,13 @@ export class UserRepository {
     const queryText = `INSERT INTO public.users(uid, email, password, nickname) VALUES('${uid}', '${email}', '${password}', '${nickname}')`
 
     await this._databaseService.getQueryResult<UserDto>(queryText)
+  }
+
+  async getUserByEmail(email: string): Promise<UserDto> {
+    const queryText = `SELECT uid, email, password, nickname FROM public.users AS users
+      WHERE users.email = '${email}'`
+
+    const { row: user } = await this._databaseService.getQueryResult<UserDto>(queryText)
+    return user
   }
 }
