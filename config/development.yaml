@@ -2,10 +2,15 @@ server:
   port: 3000
 
 db:
-  host: ""
-  username: ""
-  password: ""
+  type: "postgres"
+  host: "localhost"
+  username: "postgres"
+  password: "admin"
+  database: "oc_test_task"
   synchronize: true
+  poolName: "DB_POOL"
 
 jwt:
   secret: "Some_secret_string21"
+  expiresIn: 1800
+  refreshTokenExpiresIn: 54000
