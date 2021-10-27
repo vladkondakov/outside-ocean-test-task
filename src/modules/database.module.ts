@@ -3,7 +3,7 @@ import { Logger, Module, OnApplicationShutdown } from "@nestjs/common"
 import { Pool } from "pg"
 import Config from "config"
 
-import { DatabaseService } from "src/services/database.service"
+import { DatabaseService } from "../services/database.service"
 
 const dbConfig: any = Config.get("db")
 const dbPoolName: string = process.env.DB_POOL_NAME || dbConfig.poolName

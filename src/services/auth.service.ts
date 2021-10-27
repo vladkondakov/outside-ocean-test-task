@@ -1,16 +1,17 @@
 import { Injectable, UnauthorizedException } from "@nestjs/common"
+import { JwtService } from "@nestjs/jwt"
+
 import { v4 as uuidv4 } from "uuid"
 import * as bcrypt from "bcrypt"
 import Config from "config"
 
 import { UserRepository } from "../repositories/user.repository"
+import { AuthRepository } from "src/repositories/auth.repository"
 import { SignInCredentialsDto } from "../dto/auth/signin-credentials.dto"
 import { UserDto } from "src/dto/user/user.dto"
 import { LoginCredentialsDto } from "src/dto/auth/login-credentials.dto"
 import { JwtPayload } from "src/dto/auth/jwt-payload.dto"
 import { JwtTokensDto } from "src/dto/auth/jwt-tokens.dto"
-import { JwtService } from "@nestjs/jwt"
-import { AuthRepository } from "src/repositories/auth.repository"
 
 const jwtConfig: any = Config.get("jwt")
 

@@ -1,8 +1,7 @@
-import { BadRequestException, Injectable } from "@nestjs/common"
-import { RefreshTokenDto } from "src/dto/auth/refresh-token.dto"
-import { UserToInsert } from "src/dto/user/user-to-insert.dto"
-import { UserDto } from "src/dto/user/user.dto"
-import { DatabaseService } from "src/services/database.service"
+import { Injectable } from "@nestjs/common"
+
+import { RefreshTokenDto } from "../dto/auth/refresh-token.dto"
+import { DatabaseService } from "../services/database.service"
 
 @Injectable()
 export class AuthRepository {
@@ -10,8 +9,7 @@ export class AuthRepository {
 
   async getRefreshTokenByUserUid(uid: string): Promise<RefreshTokenDto> {
     const queryText = `SELECT * FROM public.refresh_token as rt
-      WHERE rt.user_uid = '${uid}'
-      LIMIT 1`
+      WHERE rt.user_uid = '${uid}'`
 
     const { row: refreshToken } = await this._databaseService.getQueryResult<RefreshTokenDto>(queryText)
     return refreshToken
@@ -19,8 +17,7 @@ export class AuthRepository {
 
   async getRefreshTokenByHash(hash: string): Promise<RefreshTokenDto> {
     const queryText = `SELECT * FROM public.refresh_token as rt
-      WHERE rt.hash = '${hash}'
-      LIMIT 1`
+      WHERE rt.hash = '${hash}'`
 
     const { row: refreshToken } = await this._databaseService.getQueryResult<RefreshTokenDto>(queryText)
     return refreshToken

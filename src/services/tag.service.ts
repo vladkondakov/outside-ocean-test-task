@@ -1,13 +1,15 @@
 import { BadRequestException, ForbiddenException, Injectable, NotFoundException } from "@nestjs/common"
-import { PaginatedResultDto } from "src/dto/general/paginated-result.dto"
-import { CreateTagDto } from "src/dto/tag/create-tag.dto"
-import { TagFullDto } from "src/dto/tag/tag-full.dto"
-import { TagListQueryParamsDto } from "src/dto/tag/tag-list-query-params.dto"
-import { TagDto } from "src/dto/tag/tag.dto"
-import { UpdateTagDto } from "src/dto/tag/update-tag.dto"
-import { CustomMapper } from "src/helpers/mappers/custom-mapper"
-import { TagRepository } from "src/repositories/tag.repository"
-import { UserRepository } from "src/repositories/user.repository"
+
+import { TagRepository } from "../repositories/tag.repository"
+import { UserRepository } from "../repositories/user.repository"
+import { PaginatedResultDto } from "../dto/general/paginated-result.dto"
+import { CreateTagDto } from "../dto/tag/create-tag.dto"
+import { TagFullDto } from "../dto/tag/tag-full.dto"
+import { TagListQueryParamsDto } from "../dto/tag/tag-list-query-params.dto"
+import { TagDto } from "../dto/tag/tag.dto"
+import { UpdateTagDto } from "../dto/tag/update-tag.dto"
+
+import { CustomMapper } from "../helpers/mappers/custom-mapper"
 
 @Injectable()
 export class TagService {

@@ -1,15 +1,17 @@
 import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, Query, UseGuards, UseInterceptors } from "@nestjs/common"
 import { AuthGuard } from "@nestjs/passport"
-import { getUser } from "src/decorators/get-user.decorator"
-import { JwtPayload } from "src/dto/auth/jwt-payload.dto"
-import { PaginatedResultDto } from "src/dto/general/paginated-result.dto"
-import { CreateTagDto } from "src/dto/tag/create-tag.dto"
-import { TagFullDto } from "src/dto/tag/tag-full.dto"
-import { TagListQueryParamsDto } from "src/dto/tag/tag-list-query-params.dto"
-import { TagDto } from "src/dto/tag/tag.dto"
-import { UpdateTagDto } from "src/dto/tag/update-tag.dto"
-import { ResponseInterceptor } from "src/interceptors/api-response.interceptor"
-import { TagService } from "src/services/tag.service"
+
+import { ResponseInterceptor } from "../interceptors/api-response.interceptor"
+import { getUser } from "../decorators/get-user.decorator"
+import { TagService } from "../services/tag.service"
+
+import { JwtPayload } from "../dto/auth/jwt-payload.dto"
+import { PaginatedResultDto } from "../dto/general/paginated-result.dto"
+import { CreateTagDto } from "../dto/tag/create-tag.dto"
+import { TagFullDto } from "../dto/tag/tag-full.dto"
+import { TagListQueryParamsDto } from "../dto/tag/tag-list-query-params.dto"
+import { TagDto } from "../dto/tag/tag.dto"
+import { UpdateTagDto } from "../dto/tag/update-tag.dto"
 
 @UseInterceptors(new ResponseInterceptor<any>())
 @UseGuards(AuthGuard())

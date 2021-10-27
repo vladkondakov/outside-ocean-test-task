@@ -1,16 +1,16 @@
 import { Injectable } from "@nestjs/common"
-import { CreateTagDto } from "src/dto/tag/create-tag.dto"
-import { TagFullDbDto } from "src/dto/tag/tag-full-db.dto"
-import { TagListQueryParamsDto } from "src/dto/tag/tag-list-query-params.dto"
-import { TagDto } from "src/dto/tag/tag.dto"
-import { UpdateTagDto } from "src/dto/tag/update-tag.dto"
-import { SortTypeEnum } from "src/enums/tag/sort-order-type.enum"
-import { GeneralHelpers } from "src/helpers/helpers"
-import { IPaginatedResult } from "src/interfaces/paginated-result.interface"
-import { IPaginationMeta } from "src/interfaces/pagination-meta.interface"
-import { IPaginationResultMeta } from "src/interfaces/pagination-result-meta.interface"
 
 import { DatabaseService } from "src/services/database.service"
+import { SortTypeEnum } from "../enums/tag/sort-order-type.enum"
+import { IPaginatedResult } from "../interfaces/paginated-result.interface"
+import { IPaginationResultMeta } from "../interfaces/pagination-result-meta.interface"
+import { CreateTagDto } from "../dto/tag/create-tag.dto"
+import { TagFullDbDto } from "../dto/tag/tag-full-db.dto"
+import { TagListQueryParamsDto } from "../dto/tag/tag-list-query-params.dto"
+import { TagDto } from "../dto/tag/tag.dto"
+import { UpdateTagDto } from "../dto/tag/update-tag.dto"
+
+import { GeneralHelpers } from "../helpers/helpers"
 
 @Injectable()
 export class TagRepository {

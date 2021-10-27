@@ -1,4 +1,4 @@
-import { IPaginationMeta } from "src/interfaces/pagination-meta.interface"
+import { IPaginationMeta } from "../interfaces/pagination-meta.interface"
 
 export class GeneralHelpers {
   static getPaginationMeta(pageNumber: number, pageSize: number, totalResults: number): IPaginationMeta {

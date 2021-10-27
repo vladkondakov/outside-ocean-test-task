@@ -4,7 +4,7 @@ import { ExtractJwt, Strategy } from "passport-jwt"
 import Config from "config"
 
 import { AuthService } from "../services/auth.service"
-import { JwtPayload } from "src/dto/auth/jwt-payload.dto"
+import { JwtPayload } from "../dto/auth/jwt-payload.dto"
 
 const jwtConfig: any = Config.get("jwt")
 

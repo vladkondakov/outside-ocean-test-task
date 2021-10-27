@@ -1,4 +1,4 @@
-import { IPaginationResultMeta } from "src/interfaces/pagination-result-meta.interface"
+import { IPaginationResultMeta } from "../../interfaces/pagination-result-meta.interface"
 
 export class PaginatedResultDto<T> {
   data: T[]

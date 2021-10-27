@@ -1,8 +1,9 @@
 import { BadRequestException, Injectable } from "@nestjs/common"
-import { UpdateUserDto } from "src/dto/user/update-user.dto"
-import { UserToInsert } from "src/dto/user/user-to-insert.dto"
-import { UserDto } from "src/dto/user/user.dto"
-import { DatabaseService } from "src/services/database.service"
+
+import { DatabaseService } from "../services/database.service"
+import { UpdateUserDto } from "../dto/user/update-user.dto"
+import { UserToInsert } from "../dto/user/user-to-insert.dto"
+import { UserDto } from "../dto/user/user.dto"
 
 @Injectable()
 export class UserRepository {

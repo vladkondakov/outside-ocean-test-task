@@ -3,12 +3,12 @@ import { JwtModule, JwtService } from "@nestjs/jwt"
 import { PassportModule } from "@nestjs/passport"
 import Config from "config"
 
-import { JwtStrategy } from "../providers/jwt.strategy"
+import { DatabaseModule } from "./database.module"
 import { AuthController } from "../controllers/auth.controller"
 import { AuthService } from "../services/auth.service"
-import { DatabaseModule } from "./database.module"
-import { UserRepository } from "src/repositories/user.repository"
-import { AuthRepository } from "src/repositories/auth.repository"
+import { JwtStrategy } from "../providers/jwt.strategy"
+import { UserRepository } from "../repositories/user.repository"
+import { AuthRepository } from "../repositories/auth.repository"
 
 const jwtConfig: any = Config.get("jwt")
 

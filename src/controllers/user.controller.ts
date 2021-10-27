@@ -1,14 +1,15 @@
 import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, UseGuards, UseInterceptors } from "@nestjs/common"
 import { AuthGuard } from "@nestjs/passport"
-import { getUser } from "src/decorators/get-user.decorator"
-import { JwtPayload } from "src/dto/auth/jwt-payload.dto"
-import { TagsListDto } from "src/dto/tag/tags-list.dto"
-import { TagDto } from "src/dto/tag/tag.dto"
-import { UpdateUserDto } from "src/dto/user/update-user.dto"
-import { UserFullDto } from "src/dto/user/user-full.dto"
-import { UserDto } from "src/dto/user/user.dto"
-import { ResponseInterceptor } from "src/interceptors/api-response.interceptor"
-import { UserService } from "src/services/user.service"
+
+import { ResponseInterceptor } from "../interceptors/api-response.interceptor"
+import { UserService } from "../services/user.service"
+import { getUser } from "../decorators/get-user.decorator"
+
+import { JwtPayload } from "../dto/auth/jwt-payload.dto"
+import { TagsListDto } from "../dto/tag/tags-list.dto"
+import { UpdateUserDto } from "../dto/user/update-user.dto"
+import { UserFullDto } from "../dto/user/user-full.dto"
+import { UserDto } from "../dto/user/user.dto"
 
 @UseInterceptors(new ResponseInterceptor<any>())
 @UseGuards(AuthGuard())

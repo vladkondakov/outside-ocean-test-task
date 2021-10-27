@@ -1,17 +1,13 @@
-import { ForbiddenException, Injectable } from "@nestjs/common"
-import * as bcrypt from "bcrypt"
-import { TagsListDto } from "src/dto/tag/tags-list.dto"
-import { TagDto } from "src/dto/tag/tag.dto"
+import { Injectable } from "@nestjs/common"
 
-import { UpdateUserDto } from "src/dto/user/update-user.dto"
-import { UserFullDto } from "src/dto/user/user-full.dto"
-import { UserDto } from "src/dto/user/user.dto"
-import { CustomMapper } from "src/helpers/mappers/custom-mapper"
-import { AuthRepository } from "src/repositories/auth.repository"
-import { TagRepository } from "src/repositories/tag.repository"
-import { UserTagRepository } from "src/repositories/user-tag.repository"
-import { UserRepository } from "src/repositories/user.repository"
 import { AuthService } from "./auth.service"
+import { TagRepository } from "../repositories/tag.repository"
+import { UserTagRepository } from "../repositories/user-tag.repository"
+import { UserRepository } from "../repositories/user.repository"
+import { TagsListDto } from "../dto/tag/tags-list.dto"
+import { UpdateUserDto } from "../dto/user/update-user.dto"
+import { UserFullDto } from "../dto/user/user-full.dto"
+import { UserDto } from "../dto/user/user.dto"
 
 @Injectable()
 export class UserService {

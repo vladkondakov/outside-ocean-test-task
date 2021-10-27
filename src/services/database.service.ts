@@ -2,8 +2,8 @@ import { Inject, Injectable, Logger } from "@nestjs/common"
 import { Pool, QueryResult } from "pg"
 import Config from "config"
 
-import { DbQResultDto } from "src/dto/db/db-qresult.dto"
-import { DbQResultArrayDto } from "src/dto/db/db-qresult-array.dto"
+import { DbQResultDto } from "../dto/db/db-qresult.dto"
+import { DbQResultArrayDto } from "../dto/db/db-qresult-array.dto"
 
 const dbConfig: any = Config.get("db")
 
