@@ -50,4 +50,4 @@ This project provides [rest API](#endpoints) for library.
 - **sortOrder** (_int_)
   > Default value is 0. This field is kinda represent of priority.
 
-**All endpoints after _api\logout_ require must contain bearer token in authorization header **
+**All endpoints after _api/logout_ require must contain bearer token in authorization header**
