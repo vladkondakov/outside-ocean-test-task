@@ -5,7 +5,7 @@ import Config from "config"
 import { AppModule } from "./app.module"
 
 async function bootstrap() {
-  const server: any = Config.get("server")
+  const server: any = process.env.PORT || Config.get("server")
 
   const app = await NestFactory.create(AppModule, {
     logger: ["error", "log", "warn"],
