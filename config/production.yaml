@@ -1,0 +1,15 @@
+server:
+  port: 3000
+
+db:
+  type: "postgres"
+  host: "ec2-34-225-66-116.compute-1.amazonaws.com"
+  username: "yrvmpmhktdoexr"
+  password: "22c6e647b33fc92ce251ae54698b42341bc09ebe2932a4b1d46f2cdfa9405cec"
+  database: "dnj52ga727ja8"
+  poolName: "DB_POOL"
+
+jwt:
+  secret: "Some_secret_string21"
+  expiresIn: 1800
+  refreshTokenExpiresIn: 54000
