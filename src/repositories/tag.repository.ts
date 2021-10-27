@@ -111,4 +111,17 @@ export class TagRepository {
 
     return result
   }
+
+  async getTags() {
+    const queryText = `SELECT id FROM public.tags AS tags`
+    const { rows: tags } = await this._databaseService.getQueryArrayResult<TagDto>(queryText)
+    return tags
+  }
+
+  async addTagsToUser() {
+    const queryText = ``
+
+    const { rows: tags } = await this._databaseService.getQueryArrayResult<TagDto>(queryText)
+    return tags
+  }
 }

@@ -11,11 +11,12 @@ import { AuthService } from "src/services/auth.service"
 import { AuthModule } from "./auth.module"
 import { AuthRepository } from "src/repositories/auth.repository"
 import { JwtModule } from "@nestjs/jwt"
+import { UserTagRepository } from "src/repositories/user-tag.repository"
 
 @Module({
   imports: [PassportModule.register({ defaultStrategy: "jwt" }), DatabaseModule, AuthModule],
   controllers: [UserController],
-  providers: [UserService, UserRepository, TagRepository],
+  providers: [UserService, UserRepository, TagRepository, UserTagRepository],
   exports: [UserService],
 })
 export class UserModule {}
