@@ -50,8 +50,7 @@ export class UserService {
     return result
   }
 
-  async deleteCurrentUser(uid: string) {
+  async deleteCurrentUserCascade(uid: string) {
     await this._userRepository.deleteUser(uid)
-    await this._authRepository.deleteRefreshToken(uid)
   }
 }

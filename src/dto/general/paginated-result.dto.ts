@@ -1,0 +1,6 @@
+import { IPaginationResultMeta } from "src/interfaces/pagination-result-meta.interface"
+
+export class PaginatedResultDto<T> {
+  data: T[]
+  meta: IPaginationResultMeta
+}

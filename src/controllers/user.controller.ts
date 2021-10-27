@@ -23,7 +23,7 @@ export class UserController {
   }
 
   @Delete()
-  deleteUser(@getUser() payload: JwtPayload) {
-    return this._userService.deleteCurrentUser(payload.uid)
+  deleteUserCascade(@getUser() payload: JwtPayload) {
+    return this._userService.deleteCurrentUserCascade(payload.uid)
   }
 }

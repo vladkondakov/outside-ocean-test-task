@@ -1,6 +1,8 @@
 import { BadRequestException, ForbiddenException, Injectable, NotFoundException } from "@nestjs/common"
+import { PaginatedResultDto } from "src/dto/general/paginated-result.dto"
 import { CreateTagDto } from "src/dto/tag/create-tag.dto"
 import { TagFullDto } from "src/dto/tag/tag-full.dto"
+import { TagListQueryParamsDto } from "src/dto/tag/tag-list-query-params.dto"
 import { TagDto } from "src/dto/tag/tag.dto"
 import { UpdateTagDto } from "src/dto/tag/update-tag.dto"
 import { CustomMapper } from "src/helpers/mappers/custom-mapper"
@@ -9,6 +11,9 @@ import { UserRepository } from "src/repositories/user.repository"
 
 @Injectable()
 export class TagService {
+  private readonly DEFAULT_PAGE_NUMBER: number = 1
+  private readonly DEFAULT_PAGE_SIZE: number = 100
+
   constructor(private readonly _tagRepository: TagRepository, private readonly _userRepository: UserRepository) {}
 
   async createTag(uid: string, tagToCreate: CreateTagDto): Promise<TagDto> {
@@ -67,5 +72,33 @@ export class TagService {
     const tagFull = CustomMapper.mapToTagFull(user, name, sortOrder)
 
     return tagFull
+  }
+
+  async deleteTagCascade(uid: string, tagId: number): Promise<void> {
+    const tag = await this._tagRepository.getTagById(tagId)
+    if (tag.creator !== uid) {
+      throw new ForbiddenException("Current user does not have access to update this tag")
+    }
+
+    await this._tagRepository.deleteTagCascade(tagId)
+  }
+
+  async getSortedPaginatedTags(queryParams: TagListQueryParamsDto): Promise<PaginatedResultDto<TagFullDto>> {
+    const { sortByName, sortByOrder, page, pageSize } = queryParams
+
+    queryParams.sortByName = sortByName
+    queryParams.sortByOrder = sortByOrder
+    queryParams.page = page || this.DEFAULT_PAGE_NUMBER
+    queryParams.pageSize = (pageSize && pageSize > this.DEFAULT_PAGE_SIZE) || !pageSize ? this.DEFAULT_PAGE_SIZE : pageSize
+
+    const { items: tags, meta } = await this._tagRepository.getSortedPaginatedTags(queryParams)
+    const mappedTags = CustomMapper.mapToTagFullArray(tags)
+
+    const result: PaginatedResultDto<TagFullDto> = {
+      data: mappedTags,
+      meta,
+    }
+
+    return result
   }
 }
