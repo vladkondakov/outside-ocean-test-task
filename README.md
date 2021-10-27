@@ -13,6 +13,41 @@ This project provides [rest API](#endpoints) for user and tags.
 5. Create tables with `npm run migration:up`
 6. Run server `npm run start:dev`
 
+## Tables
+
+### User:
+
+| field    |    type     |
+| -------- | :---------: |
+| uid      |    uuid     |
+| email    | string(100) |
+| password | string(100) |
+| nickname | string(30)  |
+
+### Tag:
+
+| field     |      type      |
+| --------- | :------------: |
+| id        |      int       |
+| creator   |      uuid      |
+| name      |   string(40)   |
+| sortOrder | int default(0) |
+
+### Refresh token:
+
+| field     |   type    |
+| --------- | :-------: |
+| hash      |  string   |
+| createdAt | timestamp |
+| user_uid  |   uuid    |
+
+### User tags:
+
+| field    | type |
+| -------- | :--: |
+| user_uid | uid  |
+| tag_id   | int  |
+
 ## Endpoints
 
 [Postman collection](https://github.com/vladkondakov/outside-ocean-test-task/blob/master/postman.collections.json)
@@ -42,7 +77,7 @@ This project provides [rest API](#endpoints) for user and tags.
 - **Password** (_string_)
   > Must contain at least one uppercase letter, one lowercase letter and one number. Max length is 100 symbols.
 - **Nickname** (_string_)
-  > Must be unique.
+  > Must be unique. Max length is 30 symbols
 - **creator** (_string_)
   > uid of the user who created the tag. Only this user can update and delete this tag.
 - **name** (_string_).
@@ -50,4 +85,4 @@ This project provides [rest API](#endpoints) for user and tags.
 - **sortOrder** (_int_)
   > Default value is 0. This field is kinda represent of priority.
 
-**All endpoints after _api/logout_ require must contain bearer token in authorization header**
+**All endpoints after _api/logout_ require bearer token in authorization header**
