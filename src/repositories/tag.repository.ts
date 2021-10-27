@@ -74,25 +74,30 @@ export class TagRepository {
         LEFT JOIN public.users AS u
         ON t.creator = u.uid
       `
+
+    if (sortByOrder !== SortTypeEnum.none || sortByName !== SortTypeEnum.none) {
+      queryText += `ORDER BY `
+    }
+
     if (sortByOrder === SortTypeEnum.asc) {
-      queryText += `ORDER BY sortOrder ASC`
+      queryText += `sortorder ASC, `
     }
     if (sortByOrder === SortTypeEnum.desc) {
-      queryText += `ORDER BY sortOrder DESC`
+      queryText += `sortorder DESC, `
     }
     if (sortByName === SortTypeEnum.asc) {
-      queryText += `ORDER BY name ASC`
+      queryText += `name ASC, `
     }
-    if (sortByName === SortTypeEnum.asc) {
-      queryText += `ORDER BY name DESC`
+    if (sortByName === SortTypeEnum.desc) {
+      queryText += `name DESC, `
     }
+
+    queryText = queryText.slice(0, -2)
 
     const { rowsCount } = await this._databaseService.getQueryArrayResult<TagFullDbDto>(queryText)
     const { offset, actualPage, totalPages } = GeneralHelpers.getPaginationMeta(page, pageSize, rowsCount)
 
-    const queryTextWithOffset =
-      queryText +
-      `
+    queryText += `
       LIMIT ${pageSize}
       OFFSET ${offset}`
 

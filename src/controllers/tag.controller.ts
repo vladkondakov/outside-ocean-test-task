@@ -21,7 +21,6 @@ export class TagController {
 
   @Get()
   getSortedPaginatedTags(@Query() queryParams: TagListQueryParamsDto): Promise<PaginatedResultDto<TagFullDto>> {
-    console.log(queryParams)
     return this._tagService.getSortedPaginatedTags(queryParams)
   }
 
