@@ -2,7 +2,7 @@
 
 ## Description
 
-This project provides [rest API](#endpoints) for library.
+This project provides [rest API](#endpoints) for user and tags.
 
 ## Usage
 
