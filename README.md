@@ -54,9 +54,10 @@ This project provides [rest API](#endpoints) for user and tags.
 
 | Methods | Endpoints                                    | Description                                                                                                                                   |
 | :-----: | -------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-|  POST   | api/signin                                   | Sign in. Returns access and refresh. tokens                                                                                                   |
-|  POST   | api/login                                    | Login. Returns access and refresh tokens                                                                                                      |
-|  POST   | api/logout                                   | Logout user                                                                                                                                   |
+|  POST   | api/auth/signin                              | Sign in. Returns access and refresh tokens tokens                                                                                             |
+|  POST   | api/auth/login                               | Login. Returns access and refresh tokens tokens                                                                                               |
+|  POST   | api/auth/logout                              | Logout user                                                                                                                                   |
+|  POST   | api/auth/refresh                             | Refresh token. Returns new access and refresh tokens                                                                                          |
 |   GET   | api/user                                     | Returns current user info                                                                                                                     |
 |   PUT   | api/user                                     | Update current user. Returns updated user                                                                                                     |
 | DELETE  | api/user                                     | Delete (cascade) and logout current user                                                                                                      |
@@ -85,4 +86,4 @@ This project provides [rest API](#endpoints) for user and tags.
 - **sortOrder** (_int_)
   > Default value is 0. This field is kinda represent of priority.
 
-**All endpoints after _api/logout_ require bearer token in authorization header**
+**All endpoints after _api/auth/logout_ require bearer token in authorization header**

@@ -54,6 +54,7 @@ export class TagService {
     }
 
     const tag = await this._tagRepository.getTagById(tagId)
+
     if (tag == null) {
       throw new NotFoundException("Tag with that id: not found")
     }
@@ -78,6 +79,11 @@ export class TagService {
 
   async deleteTagCascade(uid: string, tagId: number): Promise<void> {
     const tag = await this._tagRepository.getTagById(tagId)
+
+    if (tag == null) {
+      throw new NotFoundException("Tag with that id: not found")
+    }
+
     if (tag.creator !== uid) {
       throw new ForbiddenException("Current user does not have access to update this tag")
     }
