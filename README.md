@@ -50,9 +50,9 @@ This project provides [rest API](#endpoints) for user and tags.
 
 ## Endpoints
 
-### [Postman collection](https://github.com/vladkondakov/outside-ocean-test-task/blob/master/postman.collections.json)
+#### [Postman collection](https://github.com/vladkondakov/outside-ocean-test-task/blob/master/postman.collections.json)
 
-### **Swagger documentation** is available here: /api
+#### **Swagger documentation** is available here: /api
 
 | Methods | Endpoints                                     | Description                                                                                                                                   |
 | :-----: | --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
