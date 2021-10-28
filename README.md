@@ -50,26 +50,28 @@ This project provides [rest API](#endpoints) for user and tags.
 
 ## Endpoints
 
-[Postman collection](https://github.com/vladkondakov/outside-ocean-test-task/blob/master/postman.collections.json)
+### [Postman collection](https://github.com/vladkondakov/outside-ocean-test-task/blob/master/postman.collections.json)
 
-| Methods | Endpoints                                    | Description                                                                                                                                   |
-| :-----: | -------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-|  POST   | api/auth/signin                              | Sign in. Returns access and refresh tokens tokens                                                                                             |
-|  POST   | api/auth/login                               | Login. Returns access and refresh tokens tokens                                                                                               |
-|  POST   | api/auth/logout                              | Logout user                                                                                                                                   |
-|  POST   | api/auth/refresh                             | Refresh token. Returns new access and refresh tokens                                                                                          |
-|   GET   | api/user                                     | Returns current user info                                                                                                                     |
-|   PUT   | api/user                                     | Update current user. Returns updated user                                                                                                     |
-| DELETE  | api/user                                     | Delete (cascade) and logout current user                                                                                                      |
-|  POST   | api/tag                                      | Create new tag. Returns created tag                                                                                                           |
-|   GET   | api/tag/:id                                  | Returns tag with info about the creator                                                                                                       |
-|   GET   | api/tag?sortByOrder&sortByName&page&pageSize | Returns the sorted and paginated list of tags with info about the creators and pagination meta                                                |
-|   PUT   | api/tag/:id                                  | Update tag if it was created by the current user. Returns tag with full info about the creator                                                |
-| DELETE  | api/tag/:id                                  | Delete (cascade) tag if it was created by current user                                                                                        |
-|  POST   | api/user/tag                                 | Adds tags to the current user. If one of provided tags does not exist then no tags will be added. Returns list with info about the added tags |
-| DELETE  | api/user/tag/:id                             | Delete tag from the current user                                                                                                              |
-|   GET   | api/user/tag/my                              | Returns list of the current user tags                                                                                                         |
-|   PUT   | api/subscription/:userID                     | Give user subscription or extend it                                                                                                           |
+### **Swagger documentation** is available here: /api
+
+| Methods | Endpoints                                     | Description                                                                                                                                   |
+| :-----: | --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+|  POST   | /api/auth/signin                              | Sign in. Returns access and refresh tokens tokens                                                                                             |
+|  POST   | /api/auth/login                               | Login. Returns access and refresh tokens tokens                                                                                               |
+|  POST   | /api/auth/logout                              | Logout user                                                                                                                                   |
+|  POST   | /api/auth/refresh                             | Refresh token. Returns new access and refresh tokens                                                                                          |
+|   GET   | /api/user                                     | Returns current user info                                                                                                                     |
+|   PUT   | /api/user                                     | Update current user. Returns updated user                                                                                                     |
+| DELETE  | /api/user                                     | Delete (cascade) and logout current user                                                                                                      |
+|  POST   | /api/tag                                      | Create new tag. Returns created tag                                                                                                           |
+|   GET   | /api/tag/:id                                  | Returns tag with info about the creator                                                                                                       |
+|   GET   | /api/tag?sortByOrder&sortByName&page&pageSize | Returns the sorted and paginated list of tags with info about the creators and pagination meta                                                |
+|   PUT   | /api/tag/:id                                  | Update tag if it was created by the current user. Returns tag with full info about the creator                                                |
+| DELETE  | /api/tag/:id                                  | Delete (cascade) tag if it was created by current user                                                                                        |
+|  POST   | /api/user/tag                                 | Adds tags to the current user. If one of provided tags does not exist then no tags will be added. Returns list with info about the added tags |
+| DELETE  | /api/user/tag/:id                             | Delete tag from the current user                                                                                                              |
+|   GET   | /api/user/tag/my                              | Returns list of the current user tags                                                                                                         |
+|   PUT   | /api/subscription/:userID                     | Give user subscription or extend it                                                                                                           |
 
 ## Information
 
