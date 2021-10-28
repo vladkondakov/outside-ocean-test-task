@@ -71,7 +71,6 @@ This project provides [REST API](#endpoints) for user and tags.
 |  POST   | /api/user/tag                                 | Adds tags to the current user. If one of provided tags does not exist then no tags will be added. Returns list with info about the added tags |
 | DELETE  | /api/user/tag/:id                             | Delete tag from the current user                                                                                                              |
 |   GET   | /api/user/tag/my                              | Returns list of the current user tags                                                                                                         |
-|   PUT   | /api/subscription/:userID                     | Give user subscription or extend it                                                                                                           |
 
 ## Information
 
